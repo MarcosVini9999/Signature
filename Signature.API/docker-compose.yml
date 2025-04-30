@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: subscriptions-db
+    environment:
+      POSTGRES_DB: subscriptions
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: senha123
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: rabbitmq:3.11-management-alpine
+    container_name: subscriptions-rabbit
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  api:
+    build:
+      context: ..
+      dockerfile: Signature.API/Dockerfile
+    container_name: subscriptions-api
+    depends_on:
+      - db
+      - rabbitmq
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: "Host=db;Port=5432;Database=subscriptions;Username=postgres;Password=senha123"
+      RabbitMq__Host: "rabbitmq://rabbitmq"
+      RabbitMq__Username: "guest"
+      RabbitMq__Password: "guest"
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+
+volumes:
+  pgdata: {}
