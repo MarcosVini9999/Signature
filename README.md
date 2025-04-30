@@ -100,4 +100,4 @@ As tabelas **Users**, **SubscriptionPlans** e **UserSubscriptions** serão criad
 
 ---
 
-Feito com ❤️ para gerenciar assinaturas de forma escalável e desacoplada.
+Feito com ❤️ por [Marcos Vinicius](https://marcosviniciusengineer.vercel.app/en).
