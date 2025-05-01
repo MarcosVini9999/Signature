@@ -19,8 +19,8 @@ namespace Signature.API.Infra.Ioc
             this IServiceCollection services,
             IConfiguration config)
         {
-            services.AddDbContext<AppDbContext>(opt =>
-                opt.UseNpgsql(config.GetConnectionString("DefaultConnection")));
+            //services.AddDbContext<AppDbContext>(opt =>
+            //    opt.UseNpgsql(config.GetConnectionString("DefaultConnection")));
 
             services.AddMassTransit(x =>
             {
