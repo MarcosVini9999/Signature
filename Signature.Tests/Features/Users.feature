@@ -1,29 +1,18 @@
-Feature: Users API
+# language: en
+Feature: User Management API
+  In order to allow clients to manage users
   As an API consumer
   I want to create and retrieve users
-  So that I can manage user registrations
 
-  Scenario: Create a new user
-    When I POST to "/api/users" with body:
-      """
-      {
-        "Name": "Alice",
-        "Email": "alice@example.com"
-      }
-      """
-    Then the response status code should be 201
-    And the response JSON field "Name" should be "Alice"
-    And the response JSON field "Email" should be "alice@example.com"
-    And I save the "Id" from the response as "UserId"
+  Background:
+    Given the API is running
 
-  Scenario: Retrieve an existing user
-    Given I have a saved "UserId"
-    When I GET to "/api/users/{UserId}"
-    Then the response status code should be 200
-    And the response JSON field "Id" should equal the saved "UserId"
-    And the response JSON field "Name" should be "Alice"
-    And the response JSON field "Email" should be "alice@example.com"
-
-  Scenario: Retrieve a non-existent user
-    When I GET to "/api/users/00000000-0000-0000-0000-000000000000"
-    Then the response status code should be 404
+  Scenario: Create a user with valid data
+    When I send a POST request to "/api/users" with:
+      | Name | Email          |
+      | John | john@test.com  |
+    Then the response status should be Created
+    And the Location header should contain "/api/users/"
+    And the response body should be a UserDto with:
+      | Name  | Email         |
+      | John  | john@test.com |

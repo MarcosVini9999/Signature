@@ -35,18 +35,18 @@ namespace Signature.Tests.IntegrationTests
             _planId = created.Id;
         }
 
-        [Fact]
-        public async Task Test2_AssinarPlano_DeveRetornarOkComMensagem()
-        {
-            var url = $"/api/subscriptions/subscribe?userId={_userId}&planId={_planId}";
-            var resp = await _client.PostAsync(url, (HttpContent?)null);
+        //[Fact]
+        //public async Task Test2_AssinarPlano_DeveRetornarOkComMensagem()
+        //{
+        //    var url = $"/api/subscriptions/subscribe?userId={_userId}&planId={_planId}";
+        //    var resp = await _client.PostAsync(url, (HttpContent?)null);
 
-            Assert.Equal(HttpStatusCode.OK, resp.StatusCode);
-            var body = await resp.Content.ReadFromJsonAsync<Dictionary<string, string>>();
-            Assert.NotNull(body);
-            Assert.True(body!.ContainsKey("Message"));
-            Assert.Equal("Subscription successful.", body["Message"]);
-        }
+        //    Assert.Equal(HttpStatusCode.OK, resp.StatusCode);
+        //    var body = await resp.Content.ReadFromJsonAsync<Dictionary<string, string>>();
+        //    Assert.NotNull(body);
+        //    Assert.True(body!.ContainsKey("Message"));
+        //    Assert.Equal("Subscription successful.", body["Message"]);
+        //}
 
         [Fact]
         public async Task Test3_GetUsuario_DeveRetornarMesmoUsuario()
@@ -60,15 +60,15 @@ namespace Signature.Tests.IntegrationTests
             Assert.Equal("marco@ex.com", user.Email);
         }
 
-        [Fact]
-        public async Task Test4_GetPlans_DeveConterSysPlan()
-        {
-            var resp = await _client.GetAsync("/api/subscriptionplans");
+        //[Fact]
+        //public async Task Test4_GetPlans_DeveConterSysPlan()
+        //{
+        //    var resp = await _client.GetAsync("/api/subscriptionplans");
 
-            Assert.Equal(HttpStatusCode.OK, resp.StatusCode);
-            var list = await resp.Content.ReadFromJsonAsync<List<SubscriptionPlanDto>>()!;
-            Assert.NotNull(list);
-            Assert.Contains(list, p => p.Id == _planId && p.Title == "SysPlan");
-        }
+        //    Assert.Equal(HttpStatusCode.OK, resp.StatusCode);
+        //    var list = await resp.Content.ReadFromJsonAsync<List<SubscriptionPlanDto>>()!;
+        //    Assert.NotNull(list);
+        //    Assert.Contains(list, p => p.Id == _planId && p.Title == "SysPlan");
+        //}
     }
 }

@@ -7,10 +7,17 @@
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
 	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+	<CollectCoverage>true</CollectCoverage>
+	<CoverletOutputFormat>opencover,lcov,cobertura</CoverletOutputFormat>
+	<CoverletOutput>$(OutputDirectory)coverage\</CoverletOutput>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="coverlet.msbuild" Version="6.0.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -41,10 +48,6 @@
 
   <ItemGroup>
     <Using Include="Xunit" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Features\" />
   </ItemGroup>
 
 </Project>

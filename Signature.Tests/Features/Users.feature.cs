@@ -19,7 +19,7 @@ namespace Signature.Tests.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class UsersAPIFeature : object, Xunit.IClassFixture<UsersAPIFeature.FixtureData>, System.IDisposable
+    public partial class UserManagementAPIFeature : object, Xunit.IClassFixture<UserManagementAPIFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -31,7 +31,7 @@ namespace Signature.Tests.Features
 #line 1 "Users.feature"
 #line hidden
         
-        public UsersAPIFeature(UsersAPIFeature.FixtureData fixtureData, Signature_Tests_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public UserManagementAPIFeature(UserManagementAPIFeature.FixtureData fixtureData, Signature_Tests_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();
@@ -40,8 +40,8 @@ namespace Signature.Tests.Features
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Users API", "  As an API consumer\r\n  I want to create and retrieve users\r\n  So that I can mana" +
-                    "ge user registrations", ProgrammingLanguage.CSharp, featureTags);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en"), "Features", "User Management API", "  In order to allow clients to manage users\r\n  As an API consumer\r\n  I want to cr" +
+                    "eate and retrieve users", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -76,20 +76,29 @@ namespace Signature.Tests.Features
             testRunner.CollectScenarioErrors();
         }
         
+        public virtual void FeatureBackground()
+        {
+#line 7
+  #line hidden
+#line 8
+    testRunner.Given("the API is running", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+        }
+        
         void System.IDisposable.Dispose()
         {
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Create a new user")]
-        [Xunit.TraitAttribute("FeatureTitle", "Users API")]
-        [Xunit.TraitAttribute("Description", "Create a new user")]
-        public void CreateANewUser()
+        [Xunit.SkippableFactAttribute(DisplayName="Create a user with valid data")]
+        [Xunit.TraitAttribute("FeatureTitle", "User Management API")]
+        [Xunit.TraitAttribute("Description", "Create a user with valid data")]
+        public void CreateAUserWithValidData()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a new user", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 6
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a user with valid data", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 10
   this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -100,87 +109,31 @@ namespace Signature.Tests.Features
             {
                 this.ScenarioStart();
 #line 7
-    testRunner.When("I POST to \"/api/users\" with body:", "{\r\n  \"Name\": \"Alice\",\r\n  \"Email\": \"alice@example.com\"\r\n}", ((TechTalk.SpecFlow.Table)(null)), "When ");
+  this.FeatureBackground();
+#line hidden
+                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Name",
+                            "Email"});
+                table1.AddRow(new string[] {
+                            "John",
+                            "john@test.com"});
+#line 11
+    testRunner.When("I send a POST request to \"/api/users\" with:", ((string)(null)), table1, "When ");
 #line hidden
 #line 14
-    testRunner.Then("the response status code should be 201", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+    testRunner.Then("the response status should be Created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 15
-    testRunner.And("the response JSON field \"Name\" should be \"Alice\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+    testRunner.And("the Location header should contain \"/api/users/\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
+                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Name",
+                            "Email"});
+                table2.AddRow(new string[] {
+                            "John",
+                            "john@test.com"});
 #line 16
-    testRunner.And("the response JSON field \"Email\" should be \"alice@example.com\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 17
-    testRunner.And("I save the \"Id\" from the response as \"UserId\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [Xunit.SkippableFactAttribute(DisplayName="Retrieve an existing user")]
-        [Xunit.TraitAttribute("FeatureTitle", "Users API")]
-        [Xunit.TraitAttribute("Description", "Retrieve an existing user")]
-        public void RetrieveAnExistingUser()
-        {
-            string[] tagsOfScenario = ((string[])(null));
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Retrieve an existing user", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 19
-  this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 20
-    testRunner.Given("I have a saved \"UserId\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-#line 21
-    testRunner.When("I GET to \"/api/users/{UserId}\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 22
-    testRunner.Then("the response status code should be 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-#line 23
-    testRunner.And("the response JSON field \"Id\" should equal the saved \"UserId\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 24
-    testRunner.And("the response JSON field \"Name\" should be \"Alice\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 25
-    testRunner.And("the response JSON field \"Email\" should be \"alice@example.com\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [Xunit.SkippableFactAttribute(DisplayName="Retrieve a non-existent user")]
-        [Xunit.TraitAttribute("FeatureTitle", "Users API")]
-        [Xunit.TraitAttribute("Description", "Retrieve a non-existent user")]
-        public void RetrieveANon_ExistentUser()
-        {
-            string[] tagsOfScenario = ((string[])(null));
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Retrieve a non-existent user", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 27
-  this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 28
-    testRunner.When("I GET to \"/api/users/00000000-0000-0000-0000-000000000000\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 29
-    testRunner.Then("the response status code should be 404", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+    testRunner.And("the response body should be a UserDto with:", ((string)(null)), table2, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -193,12 +146,12 @@ namespace Signature.Tests.Features
             
             public FixtureData()
             {
-                UsersAPIFeature.FeatureSetup();
+                UserManagementAPIFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                UsersAPIFeature.FeatureTearDown();
+                UserManagementAPIFeature.FeatureTearDown();
             }
         }
     }
